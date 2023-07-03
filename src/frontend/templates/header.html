@@ -51,17 +51,25 @@
       clientToken: 'pub7f8204e3853f8b5544e3173557370654',
       applicationId: '72e918c6-088f-40a2-9983-024284ccb1eb',
       site: 'datadoghq.com',
-      service: 'datadog-swagstore-frontend',
+      service: 'datadog-swagstore',
       env: 'dev-auto-inject',
       // Specify a version number to identify the deployed version of your application in Datadog 
-      // version: '1.0.0',
-      sessionSampleRate: 40,
+      // version: '1.0.0', 
+      sessionSampleRate: 100,
       sessionReplaySampleRate: 100,
       trackUserInteractions: true,
       trackResources: true,
       trackLongTasks: true,
       defaultPrivacyLevel: 'mask-user-input',
     });
+
+    // Define User info with specified attributes  
+    window.DD_RUM && window.DD_RUM.setUser({
+      id: '1234',
+      name: 'John Doe',
+      email: 'john@doe.com',
+      plan: 'premium',
+    })
 
     window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
