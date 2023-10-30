@@ -55,6 +55,7 @@
       env: 'dev-auto-inject',
       // Specify a version number to identify the deployed version of your application in Datadog 
       // version: '1.0.0', 
+      allowedTracingUrls: [(url) => url.startsWith("<http://34.146.84.126/")]
       sessionSampleRate: 100,
       sessionReplaySampleRate: 100,
       trackUserInteractions: true,
