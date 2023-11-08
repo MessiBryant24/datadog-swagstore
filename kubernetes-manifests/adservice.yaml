@@ -34,6 +34,8 @@ spec:
         admission.datadoghq.com/enabled: "true"
       annotations:
         admission.datadoghq.com/java-lib.version: "v1.3.0"
+        # Add log configuration with autodiscovery
+        ad.datadoghq.com/server.logs: '[{"source":"adservice-source","service":"adservice"}]'
     spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
