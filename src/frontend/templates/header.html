@@ -64,12 +64,46 @@
       defaultPrivacyLevel: 'mask-user-input',
     });
 
-    // Define User info with specified attributes  
+    // Define a user table and user-info functions
+    class UserInfo {
+        static users = [
+            { userId: 1, userName: 'Alice', emailAddress: 'alice@example.com', userTier: 'Gold' },
+            { userId: 2, userName: 'Bob', emailAddress: 'bob@example.com', userTier: 'Silver' },
+            { userId: 3, userName: 'Carol', emailAddress: 'carol@example.com', userTier: 'Bronze' },
+            { userId: 4, userName: 'Dave', emailAddress: 'dave@example.com', userTier: 'Platinum' }
+        ];
+
+        static setUser() {
+            // select a random user from users
+            const randomIndex = Math.floor(Math.random() * this.users.length);
+            const selectedUser = this.users[randomIndex];
+
+            // return a user object
+            return {
+                getUserId: function() {
+                    return selectedUser.userId;
+                },
+                getUserName: function() {
+                    return selectedUser.userName;
+                },
+                getEmailAddress: function() {
+                    return selectedUser.emailAddress;
+                },
+                getUserTier: function() {
+                    return selectedUser.userTier;
+                } 
+            };
+        }
+    }
+    // Define a app user from user table randomly.
+    const app_user = UserInfo.setUser();
+     
+    // Define the app user info with specified attributes  
     window.DD_RUM && window.DD_RUM.setUser({
-      id: '1234',
-      name: 'John Doe',
-      email: 'john@doe.com',
-      plan: 'premium',
+      id: app_user.getUserId(),
+      name: app_user.getUserName(),
+      email: app_user.getEmailAddress(),
+      plan: app_user.getUserTier(),
     })
 
     window.DD_RUM &&
