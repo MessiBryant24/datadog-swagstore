@@ -74,9 +74,20 @@
         ];
 
         static setUser() {
-            // select a random user from users
-            const randomIndex = Math.floor(Math.random() * this.users.length);
-            const selectedUser = this.users[randomIndex];
+            let selectedUser;
+
+            // Check if a user is already stored in the session
+            const sessionUser = sessionStorage.getItem('appUser');
+            if (sessionUser) {
+                selectedUser = JSON.parse(sessionUser);
+            } else {
+                // Select a random user from users if not already stored
+                const randomIndex = Math.floor(Math.random() * this.users.length);
+                selectedUser = this.users[randomIndex];
+
+                // Store the user in sessionStorage
+                sessionStorage.setItem('appUser', JSON.stringify(selectedUser));
+            }
 
             // return a user object
             return {
